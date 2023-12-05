@@ -19,8 +19,11 @@
         <body>
             <script src="home.js"></script>
                 <h1>Bird Classification Application</h1>
-                <input type="file" id="imageInput">
-                <button onclick="getResult()">Predict Species</button>
-            <p id="result"></p>
+                <form action="/result" method="POST" enctype="multipart/form-data" onsubmit="getResult()">
+                    <input type="file" name="imageInput" id="imageInput" accept="image/">
+                    <button type="submit">Predict Species</button>
+                </form>
+            <p id="resultLabel"></p>
+            <p id="resultConf"></p>
         </body>
 </html>

@@ -1,19 +1,38 @@
-from flask import Flask, send_from_directory # Import Flask module
+import os
+
+from flask import *  # Import Flask module
 from flask_cors import CORS
 import json
 from ultralytics import YOLO
+
 app = Flask(__name__)
 CORS(app)
 
 
-
-@app.route('/result', methods=["GET"])
+@app.route('/result', methods=["GET", "POST"])
 def result():
-    #result = model.predict(imageInput)
-    result = "Prediction"
-    resultDict = { "Result": result}
-    resultString = json.dumps(resultDict)
-    return resultString
+    try:
+        print(request.files)
+        if 'imageInput' not in request.files:
+            return 'No imageInput or empty file'
+        imageInput = request.files['imageInput']
+
+        print("imageInput:", imageInput)
+
+        saved_path = os.path.join("upload_image", imageInput.filename)
+        imageInput.save(saved_path)
+
+        result = model.predict(saved_path, conf=0.5, save_conf=True)
+
+        resultDict = {"label": result[0].names.get(result[0].probs.top1), "conf": result[0].probs.top1conf.item()}
+
+        print("result:", result[0].names.get(result[0].probs.top1), result[0].probs.top1conf.item())
+
+        resultString = json.dumps(resultDict)
+
+        return resultString
+    except Exception as e:
+        return f"Error: {str(e)}"
 
 
 @app.route('/', methods=["GET"])
@@ -22,11 +41,8 @@ def get_index():
     return send_from_directory('', 'home.html', mimetype='text/html')
 
 
-@app.route('/home.js', methods=["GET"])
-def get_main():
-    return send_from_directory('', 'home.js', mimetype='text/javascript')
 
 
 if __name__ == '__main__':
     model = YOLO('best.pt')
-    app.run(port = 8000)
+    app.run(port=8000)

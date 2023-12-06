@@ -24,7 +24,7 @@ def result():
 
         result = model.predict(saved_path, conf=0.5, save_conf=True)
 
-        resultDict = {"label": result[0].names.get(result[0].probs.top1), "conf": result[0].probs.top1conf.item()}
+        resultDict = {"label": result[0].names.get(result[0].probs.top1), "confidence": result[0].probs.top1conf.item()}
 
         print("result:", result[0].names.get(result[0].probs.top1), result[0].probs.top1conf.item())
 
@@ -39,8 +39,6 @@ def result():
 @app.route('/home.html', methods=["GET"])
 def get_index():
     return send_from_directory('', 'home.html', mimetype='text/html')
-
-
 
 
 if __name__ == '__main__':

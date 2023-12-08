@@ -18,7 +18,7 @@ function getResult() {
                 var replyString = http.responseText;
                 var resultObj = JSON.parse(replyString);
 
-                // Assuming you have elements with IDs "resultLabel" and "resultConf" in your HTML
+                
                 document.getElementById("resultLabel").innerHTML = "Predicted Label: " + resultObj.label;
                 document.getElementById("resultConf").innerHTML = "Confidence: " + resultObj.conf;
             } else {

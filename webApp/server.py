@@ -23,7 +23,7 @@ def result():
         predicted_label = result[0].names.get(result[0].probs.top1)
         confidence = result[0].probs.top1conf.item()
 
-        return render_template('result.html', predicted_label=predicted_label, confidence=confidence)
+        return render_template('result.html', predicted_label=predicted_label.lower(), confidence=round(confidence, 2))
 
     except Exception as e:
         return f"Error: {str(e)}"

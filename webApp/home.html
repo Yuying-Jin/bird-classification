@@ -15,48 +15,27 @@
             box-sizing: border-box;
             color: #333;
         }
-
         h1 {
             margin-top: 50px;
             color: #fff;
         }
-
-        form {
-            margin-top: 20px;
-        }
-
         input[type="file"] {
-            font-size: 18px;
-            padding: 10px;
-            border: 2px solid #3498db;
-            border-radius: 5px;
+            font-size: 20px;
         }
-
         button {
             font-size: 20px;
-            padding: 10px 20px;
+            padding: 5px 10px;
             background-color: #2c3e50;
             color: #fff;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
         }
-
         button:hover {
             background-color: #1a252f;
         }
-
-        #resultLabel, #resultConf {
-            margin-top: 20px;
-            font-size: 18px;
-            z-index: 1;
-        }
-
         #selectedImage {
             max-width: 100%;
-            margin-top: 20px;
+            margin-top: 30px;
         }
-
         #cloud{
             position: absolute;
             width: 100%;
@@ -64,19 +43,33 @@
             background: url('static/cloud.png');
             background-size: cover;
         }
+        .image-container {
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .selected-image {
+            object-fit: fill;
+        }
     </style>
 </head>
 <body>
+<div id="cloud">
+    <h1>Bird Classification Application</h1>
+    <div class="submit-buttons">
+        <form action="/result" method="POST" enctype="multipart/form-data" onsubmit="getResult()">
+            <input type="file" name="imageInput" id="imageInput" accept="image/" required onchange="displaySelectedImage()">
+            <button type="submit">Predict Species</button>
+        </form>
+    </div>
+    <div class="image-container">
+        <img class="selected-image" id="selectedImage">
+    </div>
+</div>
 
-<h1>Bird Classification Application</h1>
-<form action="/result" method="POST" enctype="multipart/form-data" onsubmit="getResult()">
-    <input type="file" name="imageInput" id="imageInput" accept="image/" required onchange="displaySelectedImage()">
-    <button type="submit">Predict Species</button>
-</form>
-<img id="selectedImage">
-<div id="cloud"></div>
-<p id="resultLabel"></p>
-<p id="resultConf"></p>
 
 
 <script src="home.js"></script>

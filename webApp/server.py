@@ -7,6 +7,7 @@ from ultralytics import YOLO
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route('/result', methods=["GET", "POST"])
 def result():
     try:
@@ -27,10 +28,12 @@ def result():
     except Exception as e:
         return f"Error: {str(e)}"
 
+
 @app.route('/', methods=["GET"])
 @app.route('/home.html', methods=["GET"])
 def get_index():
     return send_from_directory('', 'home.html', mimetype='text/html')
+
 
 if __name__ == '__main__':
     model = YOLO('best.pt')

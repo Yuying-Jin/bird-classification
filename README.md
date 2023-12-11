@@ -1,27 +1,33 @@
 # Bird Classification
 
 ## Overview
-This project focuses on bird classification using two machine learning models: YOLOv8 and ResNet50.  The web application uses the YOLOv8 model topyt classify birds. It is built with the Flask framework in Python, providing a user-friendly interface to upload and classify bird images.
+This project focuses on bird classification using two machine learning models: YOLOv8 and ResNet50.  The web application uses the YOLOv8 model to classify birds. It is built with the Flask framework in Python, providing a user-friendly interface to upload and classify bird images.
 
 ## Prerequisites
 - Python `3.8` or higher installed
 
 ## Setup
 
-1. Navigate to the app directory:
+1. Clone the repository or Download the codebase:
+
+    ```bash
+    git clone https://github.com/Yuying-Jin/bird-classification.git # clone the repo
+    ```
+
+2. Navigate to the app directory:
 
     ```bash
     cd bird-classification/webApp
     ```
 
-2. Create a virtual environment (optional but recommended):
+3. Create a virtual environment (optional but recommended):
 
     ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
     ```
 
-3. Install dependencies:
+4. Install dependencies:
 
     ```bash
     pip install -r requirements.txt
